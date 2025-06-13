@@ -95,21 +95,19 @@ These additions allowed me to craft animations that feel natural and dynamic.
 ---
 
 ## Changes Made to Group Code
-- I **only changed the background** to better suit the winter night theme.
-- All elements (snowflakes, stars, fruits) were added as **separate animation layers**.
-- Code is fully **modular** using cleanly separated custom classes.
+- I only changed the background to better suit the winter night theme.
+- All elements (snowflakes, stars, fruits) were added as separate animation layers.
+- Code is fully modular using cleanly separated custom classes.
 
 ---
 
 ##  Use of AI Assistance
 
-To support my development process, I used **ChatGPT** as a problem-solving assistant:
+To ensure the quality and functionality of my code, I used ChatGPT as a support tool throughout the project. 
 
-- Debugging hard-to-find animation issues
-- Clarifying `lerp()`, `map()`, and Perlin noise usage
-- Improving code readability and annotation
+I consulted it to help debug errors I couldn’t solve on my own, refine specific animation logic, and improve the clarity of my code comments. All creative decisions, core logic, and final implementation were developed by me. 
 
-All core logic and creative work are my own — AI was used for clarification, troubleshooting, and iteration.
+The AI served as a coding assistant, helping me understand grammar, troubleshoot issues, and ensure readability.
 
 ---
 

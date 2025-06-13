@@ -247,7 +247,7 @@ pop(); // Restore drawing context
 
 
 
-// ========== 原图像绘制函数 ==========
+// ========== Group work code ==========
 function drawAllGraphics() {
 let polygon1 = [
 { x: 28.13, y: 483.25 },
@@ -384,7 +384,9 @@ for (let pt of polygon9) {
 vertex(pt.x, pt.y);
 }
 endShape(CLOSE);
-// 阴影
+
+
+// Shadow
 let fixedCircles = [
 { x: 228.7, y: 369.8, r: 38.5, color: '#423B40' },
 { x: 242.7, y: 314.6, r: 28, color: '#423B40' },
@@ -553,7 +555,9 @@ function drawSplitCirclePrecise(cx, cy, radius, splitOffset = 0, rotationDeg = 0
 let resolution = 0.01;
 let redPoints = [];
 let greenPoints = [];
-// 圆周点采样（全部基于局部坐标）
+
+
+// Circular point sampling (all based on local coordinates)
 for (let angle = 0; angle <= 360; angle += degrees(resolution)) {
 let x = cos(angle) * radius;
 let y = sin(angle) * radius;
@@ -563,9 +567,10 @@ redPoints.push({ x, y });
 greenPoints.push({ x, y });
 }
 }
-// 计算白线端点（在圆内）
+
+// Calculate white line endpoints (inside the circle)
 let dx = splitOffset;
-if (abs(dx) >= radius) return; // 超出圆，忽略
+if (abs(dx) >= radius) return; // Skip if outside the circle
 let dy = sqrt(sq(radius) - sq(dx));
 let top = { x: dx, y: -dy };
 let bottom = { x: dx, y: dy };
@@ -573,26 +578,31 @@ push();
 translate(cx, cy);
 rotate(rotationDeg);
 noStroke();
-// 🔴 红色区域
+
+// Red region
 fill('#DE5E60');
 beginShape();
 vertex(top.x, top.y);
 redPoints.forEach(p => vertex(p.x, p.y));
 vertex(bottom.x, bottom.y);
 endShape(CLOSE);
-// 🟢 绿色区域
+
+
+// Green region
 fill('#75AD82');
 beginShape();
 vertex(top.x, top.y);
 greenPoints.forEach(p => vertex(p.x, p.y));
 vertex(bottom.x, bottom.y);
 endShape(CLOSE);
-// // ⭕ 墨蓝描边
+
+// // Dark blue outline (optional)
 // stroke('#262F37');
 // strokeWeight(2);
 // noFill();
 // ellipse(0, 0, radius * 2);
-// ➖ 线
+
+// Dividing line
 stroke('#DBAD6E');
 strokeWeight(2);
 line(top.x, top.y, bottom.x, bottom.y);
@@ -634,19 +644,22 @@ beginShape();
 vertex(dx, 0);
 greenPoints.forEach(p => vertex(p.x, p.y));
 endShape(CLOSE);
-// // ⭕ 墨蓝描边
+
+// // Dark blue outline
 // stroke('#262F37');
 // strokeWeight(2);
 // noFill();
 // arc(0, 0, radius * 2, radius * 2, startAngle, endAngle);
-// 白线画在颜色区域相反一侧（通过镜像 y 坐标）
+
+// Draw white line on the opposite side of the colored region (by mirroring the y-coordinate)
 stroke('#DBAD6E');
 strokeWeight(2);
 line(dx, 0, dx, -arcY);
 pop();
 } 
 function drawTopArch(x, y, w, h, fillColor, strokeColor, strokeW = 2) {
-// ⬛ 填充整体形状（无描边）
+
+ // Fill the overall shape (no stroke)
 noStroke();
 fill(fillColor);
 beginShape();
@@ -655,11 +668,12 @@ let px = x + cos(a) * w / 2;
 let py = y - sin(a) * h / 2;
 vertex(px, py);
 }
-vertex(x - w / 2, y); // 左下角点
-vertex(x + w / 2, y); // 右下角点
+vertex(x - w / 2, y); // Bottom left corner
+vertex(x + w / 2, y); //Bottom right corner
 endShape(CLOSE);
-// 🟠 单独绘制弧线（有描边）
-// ⭕ 墨蓝描边
+
+ // Draw the arc separately (with stroke)
+  // Dark blue outline
 noFill();
 stroke(strokeColor);
 strokeWeight(strokeW);
